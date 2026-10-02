@@ -1,0 +1,7 @@
+# Packed builds and editor clutter
+*.zip
+*.crx
+*.pem
+.DS_Store
+Thumbs.db
+.vscode/

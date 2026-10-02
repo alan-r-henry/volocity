@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Volocity</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <span class="title">Volocity</span>
+    <span class="site" id="site">—</span>
+  </header>
+
+  <section class="group power-section">
+    <label class="switch-label power-label">
+      <input type="checkbox" id="enable-toggle" checked />
+      Volocity active on this site
+    </label>
+    <span class="hint" id="power-hint">Off: native player controls (speed/volume) are left completely alone.</span>
+  </section>
+
+  <section class="group" id="speed-group">
+    <div class="group-head">
+      <span class="label">Speed</span>
+      <span class="value" id="rate-value">1.00x</span>
+    </div>
+    <div class="slider-row">
+      <button class="step-btn" id="rate-dec" aria-label="Decrease speed">−</button>
+      <input type="range" id="rate-slider" min="0.25" max="4" step="0.05" value="1" />
+      <button class="step-btn" id="rate-inc" aria-label="Increase speed">+</button>
+    </div>
+    <div class="quick-row">
+      <button data-rate="0.5">0.5x</button>
+      <button data-rate="1">1x</button>
+      <button data-rate="1.5">1.5x</button>
+      <button data-rate="2">2x</button>
+      <button data-rate="3">3x</button>
+    </div>
+  </section>
+
+  <section class="group" id="boost-group">
+    <div class="group-head">
+      <span class="label">Volume boost</span>
+      <span class="value" id="boost-value">100%</span>
+    </div>
+    <div class="slider-row" id="boost-controls">
+      <button class="step-btn" id="boost-dec" aria-label="Decrease boost">−</button>
+      <input type="range" id="boost-slider" min="0.5" max="4" step="0.05" value="1" />
+      <button class="step-btn" id="boost-inc" aria-label="Increase boost">+</button>
+    </div>
+    <div class="quick-row" id="boost-presets">
+      <button data-boost="1">100%</button>
+      <button data-boost="1.5">150%</button>
+      <button data-boost="2">200%</button>
+      <button data-boost="3">300%</button>
+    </div>
+    <label class="switch-label smart-label">
+      <input type="checkbox" id="smart-toggle" />
+      Smart Volume — auto-boost as loud as possible, no clipping
+    </label>
+  </section>
+
+  <section class="group toggle-row">
+    <label class="switch-label">
+      <input type="checkbox" id="overlay-toggle" checked />
+      Show on-page overlay
+    </label>
+  </section>
+
+  <footer>
+    <button id="reset-btn" class="link-btn">Reset this site</button>
+    <span class="hint">Alt+Shift+↑/↓ speed · Alt+Shift+←/→ boost · Alt+Shift+V overlay</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* Volocity overlay host: isolate it from the host page's layout/styles. */
+#volocity-overlay-host {
+  all: initial !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  z-index: 2147483647 !important;
+}
+
+/* When Volocity moves fullscreen up from a <video> to its parent so the overlay
+   has something to sit on, that parent is an ordinary element and obeys the
+   page's own CSS. A fullscreen <video> does not -- the browser paints it at
+   screen size whatever the page says. So without this, a page that caps its
+   player (say "video { max-height: 42vh }") ends up showing a small picture in
+   the middle of a black screen once we have swapped.
+
+   Scoped to the element we actually swapped onto, so a site that fullscreens
+   its own container is left completely alone. */
+.volocity-fs-host:fullscreen {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #000 !important;
+}
+.volocity-fs-host:fullscreen > video {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  object-fit: contain !important;
+}

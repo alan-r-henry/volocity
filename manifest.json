@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "Volocity",
+  "version": "1.0.0",
+  "description": "Speed up or slow down any video and boost its audio beyond 100%, from a small overlay that stays on screen even in fullscreen.",
+  "permissions": ["storage", "activeTab"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Volocity",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.primevideo.com/*",
+        "*://*.amazon.com/gp/video/*",
+        "*://*.amazon.com/*/gp/video/*"
+      ],
+      "js": ["src/shadow-patch.js"],
+      "all_frames": true,
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "speed-up": {
+      "suggested_key": { "default": "Alt+Shift+Up" },
+      "description": "Increase playback speed"
+    },
+    "speed-down": {
+      "suggested_key": { "default": "Alt+Shift+Down" },
+      "description": "Decrease playback speed"
+    },
+    "boost-up": {
+      "suggested_key": { "default": "Alt+Shift+Right" },
+      "description": "Increase audio boost"
+    },
+    "boost-down": {
+      "suggested_key": { "default": "Alt+Shift+Left" },
+      "description": "Decrease audio boost"
+    },
+    "toggle-overlay": {
+      "description": "Show or hide the Volocity overlay"
+    }
+  }
+}
